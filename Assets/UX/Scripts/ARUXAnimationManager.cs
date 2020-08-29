@@ -49,19 +49,20 @@ public class ARUXAnimationManager : MonoBehaviour
         Graphics.Blit(transparentTexture, m_RenderTexture);
     }
 
-    public void ShowTapToPlace()
-    {
-        videoPlayer.clip = tapToPlaceClip;
-        videoPlayer.Play();
-        instructionText.text = k_TapToPlaceText;
-        FadeOnUI();
-    }
-
     public void ShowCrossPlatformFindAPlane()
     {
         videoPlayer.clip = findAPlaneClip;
         videoPlayer.Play();
         instructionText.text = k_MoveDeviceText;
+        FadeOnUI();
+    }
+
+
+    public void ShowTapToPlace()
+    {
+        videoPlayer.clip = tapToPlaceClip;
+        videoPlayer.Play();
+        instructionText.text = k_TapToPlaceText;
         FadeOnUI();
     }
 

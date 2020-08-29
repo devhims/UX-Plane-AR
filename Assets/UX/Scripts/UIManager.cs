@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
         if (args.state == ARSessionState.SessionTracking)
         {
             animationManager.ShowCrossPlatformFindAPlane();
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
     }
 
