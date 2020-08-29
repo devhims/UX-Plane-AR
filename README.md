@@ -1,6 +1,9 @@
 # UX-Plane-AR
 The objective of this project is to prepare a simplified version of [Unity's AR Foundation Demos - UX Onboarding](https://assetstore.unity.com/packages/templates/ar-foundation-demos-onboarding-ux-164766) asset for **plane detection based AR experiences**. 
 
+## Demo:
+ <img src="Images/demo.gif" width="350">
+
 ## How to build?
 1. Use Unity **2019.4** and above
 2. Clone/Download and open the project in Unity
