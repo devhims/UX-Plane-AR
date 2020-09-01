@@ -678,6 +678,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1690021714470235766, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: fadeOnDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1690021714470235766, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
+        type: 3}
+      propertyPath: fadeOffDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1690021714470235771, guid: 29251f2f7c5044cce8e7eb862b4d93ef,
         type: 3}
       propertyPath: m_Name

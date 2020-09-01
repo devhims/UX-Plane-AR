@@ -7,25 +7,26 @@ using UnityEngine.Video;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-
 public class UIManager : MonoBehaviour
 {
     [SerializeField] ARPlaneManager planeManager;
     [SerializeField] ARUXAnimationManager animationManager;
 
-    bool foundPlane;
+    bool prepared;
     bool goalReached;
 
     void OnEnable()
     {
+        // Hide tap UI when OnObjectPlaced event is fired.
         PlaceObjectsOnPlane.OnObjectPlaced += () => animationManager.FadeOffUI();
         ARSession.stateChanged += ShowFindPlaneUI;
     }
 
     void ShowFindPlaneUI(ARSessionStateChangedEventArgs args)
     {
-        if (args.state == ARSessionState.SessionTracking)
+        if (args.state == ARSessionState.SessionTracking && !PlanesFound())
         {
+            // Show scan UI
             animationManager.ShowCrossPlatformFindAPlane();
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
@@ -33,16 +34,22 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (PlanesFound() && !foundPlane)
+        // Proceed only when the session is in tracking state
+        if (ARSession.state != ARSessionState.SessionTracking)
         {
-            // Hide scan ground anim
-            animationManager.FadeOffUI();
-            foundPlane = true;
+            return;
         }
 
-        if (foundPlane && animationManager.fadeOffComplete && !goalReached)
+        if (PlanesFound() && !prepared)
         {
-            // Show tap anim
+            // Hide scan UI
+            animationManager.FadeOffUI();
+            prepared = true;
+        }
+
+        if (prepared && !goalReached && animationManager.fadeOffComplete)
+        {
+            // Show tap UI
             animationManager.ShowTapToPlace();
             goalReached = true;
         }

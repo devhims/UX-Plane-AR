@@ -62,9 +62,10 @@ public class ARUXReasonsManager : MonoBehaviour
         }
     }
 
-    void ARSessionOnstateChanged(ARSessionStateChangedEventArgs session)
+    void ARSessionOnstateChanged(ARSessionStateChangedEventArgs args)
     {
-        _sessionTracking = session.state == ARSessionState.SessionTracking ? true : false;
+        _sessionTracking = args.state == ARSessionState.SessionTracking ? true : false;
+        Debug.Log(args.state);
     }
 
     void ShowReason()
