@@ -43,35 +43,34 @@ public class ARUXReasonsManager : MonoBehaviour
         ARSession.stateChanged -= ARSessionOnstateChanged;
     }
 
-    void Update()
-    {
-        if (showNotTrackingReasons)
-        {
-            if (!_sessionTracking)
-            {
-                _currentReason = ARSession.notTrackingReason;
-                ShowReason();
-            }
-            else
-            {
-                if (_reasonText.gameObject.activeSelf)
-                {
-                    _reasonParent.SetActive(false);
-                }
-            }
-        }
-    }
-
     void ARSessionOnstateChanged(ARSessionStateChangedEventArgs args)
     {
         _sessionTracking = args.state == ARSessionState.SessionTracking ? true : false;
         Debug.Log(args.state);
+
+        if (showNotTrackingReasons)
+        {
+            if (_sessionTracking)
+            {
+                HideReason();
+            }
+            else
+            {
+                ShowReason();
+            }
+        }
     }
 
     void ShowReason()
     {
-        _reasonParent.SetActive(true);
+        _currentReason = ARSession.notTrackingReason;
         SetReason();
+        _reasonParent.SetActive(true);
+    }
+
+    void HideReason()
+    {
+        _reasonParent.SetActive(false);
     }
 
     void SetReason()
@@ -80,30 +79,30 @@ public class ARUXReasonsManager : MonoBehaviour
         {
             case NotTrackingReason.Initializing:
             case NotTrackingReason.Relocalizing:
-                _reasonText.text = k_InitRelocalText;
-                _reasonIcon.sprite = _initRelocalSprite;
+                SetReasonUI(k_InitRelocalText, _initRelocalSprite);
                 break;
             case NotTrackingReason.ExcessiveMotion:
-                _reasonText.text = k_MotionText;
-                _reasonIcon.sprite = _motionSprite;
+                SetReasonUI(k_MotionText, _motionSprite);
                 break;
             case NotTrackingReason.InsufficientLight:
-                _reasonText.text = k_LightText;
-                _reasonIcon.sprite = _lightSprite;
+                SetReasonUI(k_LightText, _lightSprite);
                 break;
             case NotTrackingReason.InsufficientFeatures:
-                _reasonText.text = k_FeaturesText;
-                _reasonIcon.sprite = _featuresSprite;
+                SetReasonUI(k_FeaturesText, _featuresSprite);
                 break;
             case NotTrackingReason.Unsupported:
-                _reasonText.text = k_UnsupportedText;
-                _reasonIcon.sprite = _unsupportedSprite;
+                SetReasonUI(k_UnsupportedText, _unsupportedSprite);
                 break;
             case NotTrackingReason.None:
-                _reasonText.text = k_NoneText;
-                _reasonIcon.sprite = _noneSprite;
+                SetReasonUI(k_NoneText, _noneSprite);
                 break;
         }
+    }
+
+    void SetReasonUI(string reasonText, Sprite reasonSprite)
+    {
+        _reasonText.text = reasonText;
+        _reasonIcon.sprite = reasonSprite;
     }
 
     public void TestForceShowReason(NotTrackingReason reason)
