@@ -5,7 +5,7 @@ The objective of this project is to prepare a simplified version of [Unity's AR 
  <img src="Images/demo.gif" width="350">
 
 ## How to build?
-1. Use Unity **2019.4** and above
+1. Use Unity **2019.4** and above with Android/iOS build modules downloaded and installed from Unity Hub.
 2. Clone/Download and open the project in Unity
 3. Change the build platform to Android/iOS
 4. Settings for Android are already in place, just do a build and run. Check the AR Foundation specific platform settings for iOS.
