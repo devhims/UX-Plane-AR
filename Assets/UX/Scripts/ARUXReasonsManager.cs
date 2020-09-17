@@ -108,7 +108,8 @@ public class ARUXReasonsManager : MonoBehaviour
     public void TestForceShowReason(NotTrackingReason reason)
     {
         _currentReason = reason;
-        ShowReason();
+        SetReason();
+        _reasonParent.SetActive(true);
     }
     
 }
